@@ -1,45 +1,150 @@
-# VS Code Web Setup - Run VS Code in Your Browser Anywhere
+# VS Code in Browser - Code Server
 
-This repository provides an easy-to-follow guide to set up **VS Code** in your web browser without needing to install the desktop app. Using **code-server**, a powerful tool from Coder, you can access a fully functional VS Code IDE from your browser on any device, anywhere, as long as you have an internet connection.
+This repository helps you run **VS Code in your browser** using [`code-server`](https://github.com/coder/code-server). With this setup, you can access VS Code from anywhere on any device.
 
----
+## Features
+- Run **VS Code in a web browser**.
+- Works on **Linux, Windows, macOS, and Android**.
+- Access your development environment remotely.
+- Supports **extensions, themes, and customization**.
+- Lightweight and fast.
 
-## Table of Contents
+## Installation
+Follow the steps below to install `code-server` on your device.
 
-1. [System Requirements](#system-requirements)
-2. [Step-by-Step Installation Instructions](#step-by-step-installation-instructions)
-   - [Step 1: Determine Your System Architecture](#step-1-determine-your-system-architecture)
-   - [Step 2: Download the Appropriate Version of `code-server`](#step-2-download-the-appropriate-version-of-code-server)
-   - [Step 3: Extract the Downloaded File](#step-3-extract-the-downloaded-file)
-   - [Step 4: Running `code-server`](#step-4-running-code-server)
-   - [Step 5: Setting Up Authentication (Optional)](#step-5-setting-up-authentication-optional)
-   - [Step 6: Access VS Code in Your Browser](#step-6-access-vs-code-in-your-browser)
-3. [Security Considerations](#security-considerations)
-4. [Troubleshooting](#troubleshooting)
-5. [Additional Configuration (Optional)](#additional-configuration-optional)
-   - [Running `code-server` in the Background](#running-code-server-in-the-background)
-   - [Accessing Remotely (External Access)](#accessing-remotely-external-access)
-6. [Contributing](#contributing)
+### 🖥️ Linux (Debian/Ubuntu)
+```bash
+# Update and install dependencies
+sudo apt update && sudo apt install -y curl
 
----
+# Download and install code-server
+curl -fsSL https://github.com/coder/code-server/releases/latest/download/code-server.deb -o code-server.deb
+sudo dpkg -i code-server.deb
 
-## System Requirements
+# Start code-server
+code-server
+```
 
-Before you begin, make sure your system meets the following requirements:
+### 🖥️ Linux (Arch)
+```bash
+# Install code-server from AUR
+yay -S code-server
 
-- **Operating System**: Linux-based (Ubuntu, Debian, CentOS, etc.)
-- **Processor**: Intel i3 (or any x86_64 architecture) or ARM-based processors (e.g., Raspberry Pi)
-- **Minimum RAM**: 1 GB (recommended for smooth performance)
-- **Internet Connection**: To download the necessary files and access the VS Code interface remotely (optional).
+# Start code-server
+code-server
+```
 
----
+### 🍏 macOS
+```bash
+# Install using Homebrew
+brew install code-server
 
-## Step-by-Step Installation Instructions
+# Start code-server
+code-server
+```
 
-### Step 1: Determine Your System Architecture
+### 🖥️ Windows
+#### Using Chocolatey:
+```powershell
+choco install code-server
+```
+#### Using Scoop:
+```powershell
+scoop install code-server
+```
+#### Manual Download:
+1. Download the latest `code-server` from [Releases](https://github.com/coder/code-server/releases).
+2. Extract and run `code-server.exe`.
 
-1. Open your terminal.
-2. To check your system's architecture, use the following command:
+### 📱 Android (via Termux)
+```bash
+# Update and install dependencies
+pkg update && pkg install -y curl
 
-   ```bash
-   uname -m
+# Download and install code-server
+curl -fsSL https://github.com/coder/code-server/releases/latest/download/code-server-linux-arm64.tar.gz -o code-server.tar.gz
+tar -xvzf code-server.tar.gz
+cd code-server-*
+./code-server
+```
+
+## Usage
+After installation, start the server with:
+```bash
+code-server
+```
+You will see an output like:
+```
+info  Server listening on http://127.0.0.1:8080
+info  - Password: 123456
+info  - To disable password, use --auth none
+```
+Now open `http://127.0.0.1:8080` in your browser and enter the password.
+
+## Configuration
+Modify the configuration file at:
+```bash
+~/.config/code-server/config.yaml
+```
+To disable password authentication:
+```yaml
+auth: none
+```
+To change the port:
+```yaml
+bind-addr: 0.0.0.0:8080
+```
+Restart code-server for changes to apply:
+```bash
+systemctl restart code-server
+```
+
+## Running as a Service (Linux)
+```bash
+sudo systemctl enable --now code-server
+```
+To check status:
+```bash
+systemctl status code-server
+```
+
+## Updating code-server
+To update to the latest version:
+```bash
+curl -fsSL https://github.com/coder/code-server/releases/latest/download/code-server.deb -o code-server.deb
+sudo dpkg -i code-server.deb
+```
+
+## Uninstall
+### Linux
+```bash
+sudo apt remove --purge code-server
+```
+### macOS
+```bash
+brew uninstall code-server
+```
+### Windows
+```powershell
+choco uninstall code-server
+```
+
+## Troubleshooting
+### Port Already in Use
+Change the port:
+```bash
+code-server --bind-addr 0.0.0.0:9000
+```
+
+### Permission Issues
+Run as root:
+```bash
+sudo code-server
+```
+
+## Contributing
+Feel free to contribute by submitting issues and pull requests.
+
+## License
+This project is licensed under the [MIT License](LICENSE).
+
