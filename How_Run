@@ -23,3 +23,5 @@ cert: false
 ==================================================
 sudo ./code-server
 ==============
+
+if you want expose that wev-vs you can use "ngrok" or "localhost" using nodejs 
