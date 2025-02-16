@@ -1,0 +1,25 @@
+======================
+This Code See Your Ip
+ip a | grep inet
+=============================================================
+This well Install Web-vs file and wget
+
+sudo apt install wget
+wget "https://github.com/coder/code-server/releases/download/v4.96.4/code-server-4.96.4-linux-amd64.tar.gz"
+=============================================================================================================
+tar -tzf code-server-4.96.4-linux-amd64.tar.gz
+==============================================
+cd code-server-4.96.4-linux-amd64
+cd bin
+==============================================
+nano ~/.config/code-server/config.yaml
+====
+and paste that code to your nano notpad
+====
+bind-addr: 0.0.0.0:8080
+auth: password
+password: password
+cert: false
+==================================================
+sudo ./code-server
+==============
